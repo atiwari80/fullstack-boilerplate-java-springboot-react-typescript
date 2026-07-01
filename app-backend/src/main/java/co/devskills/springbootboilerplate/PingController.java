@@ -1,16 +1,1 @@
-25:     @GetMapping(value = "/search")
-26:     @ResponseStatus(HttpStatus.OK)
-27:     public String search(@RequestParam String name) {
-28:         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:sqlitestorage.db")) {
-29:             String query = "SELECT * FROM users WHERE name = ?";
-30:             PreparedStatement statement = connection.prepareStatement(query);
-31:             statement.setString(1, name);
-32:             ResultSet resultSet = statement.executeQuery();
-33:             if (resultSet.next()) {
-34:                 return "User found: " + resultSet.getString("name");
-35:             }
-36:             return "No user found";
-37:         } catch (Exception ex) {
-38:             return "Query failed: " + ex.getMessage();
-39:         }
-40:    
+@GetMapping(value = "/search")\n@ResponseStatus(HttpStatus.OK)\npublic String search(@RequestParam String name) {\n  try (Connection connection = DriverManager.getConnection("jdbc:sqlite:sqlitestorage.db")) {\n      String query = "SELECT * FROM users WHERE name = ?";\n      PreparedStatement statement = connection.prepareStatement(query);\n      statement.setString(1, name);\n      ResultSet resultSet = statement.executeQuery();\n      if (resultSet.next()) {\n          return "User found: " + resultSet.getString("name");\n      }\n      return "No user found";\n  } catch (Exception ex) {\n      return "Query failed: " + ex.getMessage();\n  }\n\n}

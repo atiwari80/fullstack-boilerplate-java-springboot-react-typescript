@@ -1,1 +1,7 @@
-@GetMapping(value = "/search")\n@ResponseStatus(HttpStatus.OK)\npublic String search(@RequestParam String name) {\n  try (Connection connection = DriverManager.getConnection("jdbc:sqlite:sqlitestorage.db")) {\n      String query = "SELECT * FROM users WHERE name = ?";\n      PreparedStatement statement = connection.prepareStatement(query);\n      statement.setString(1, name);\n      ResultSet resultSet = statement.executeQuery();\n      if (resultSet.next()) {\n          return "User found: " + resultSet.getString("name");\n      }\n      return "No user found";\n  } catch (Exception ex) {\n      return "Query failed: " + ex.getMessage();\n  }\n\n}
+
+		try (PreparedStatement ps = connection.prepareStatement("SELECT 'Hello, ' || ? || ' from ' || ? || ' on ' || ?")){
+					  ps.setString(1, message);
+					  ps.setString(2, principal.getName());
+  ps.setDate(3, java.sql.Date.valueOf(date));
+				  return ps.executeQuery().toString();
+		}

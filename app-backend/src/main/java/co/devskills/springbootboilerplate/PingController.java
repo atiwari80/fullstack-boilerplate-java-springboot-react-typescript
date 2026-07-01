@@ -1,4 +1,1 @@
-1: String query = "SELECT * FROM users WHERE name = ?\n";
-2: try (Connection connection = DriverManager.getConnection("jdbc:sqlite:sqlitestorage.db")) {\n    PreparedStatement statement = connection.prepareStatement(query);
-3:     statement.setString(1, name);
-4:     statement.execute();\n}
+// Replace this line:\n\tString query = String.format("SELECT * FROM users WHERE name = %s", name);\n\n\t// With this:\n\tString query = "SELECT * FROM users WHERE name = ?;">
